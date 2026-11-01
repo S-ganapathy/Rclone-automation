@@ -1,0 +1,32 @@
+services:
+  minio1:
+    image: cgr.dev/chainguard/minio:latest
+    container_name: minio1
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: miniopassword
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio1_data:/data
+
+  minio2:
+    image: cgr.dev/chainguard/minio:latest
+    container_name: minio2
+    restart: unless-stopped
+    ports:
+      - "9010:9000"
+      - "9011:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin2
+      MINIO_ROOT_PASSWORD: miniopassword2
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio2_data:/data
+
+volumes:
+  minio1_data:
+  minio2_data:

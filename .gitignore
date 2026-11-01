@@ -1,0 +1,6 @@
+test_data/
+dest_local/
+transfer.log
+*.bin
+*.iso
+*.img
